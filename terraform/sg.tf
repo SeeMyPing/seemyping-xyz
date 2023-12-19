@@ -10,7 +10,7 @@ resource "scaleway_instance_security_group" "www" {
     action = "accept"
     port   = "80"
   }
-  
+
   inbound_rule {
     action = "accept"
     port   = "22"
