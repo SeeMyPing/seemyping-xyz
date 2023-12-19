@@ -6,11 +6,11 @@ terraform {
   }
   required_version = ">= 0.13"
   backend "s3" {
-    bucket                      = "tfstates-ahbai9r"
-    key                         = "seemyping-xyz.tfstate"
-    region                      = "fr-par"
+    bucket = "tfstates-ahbai9r"
+    key    = "seemyping-xyz.tfstate"
+    region = "fr-par"
     endpoints = {
-      s3  = "https://s3.fr-par.scw.cloud"
+      s3 = "https://s3.fr-par.scw.cloud"
     }
     skip_credentials_validation = true
     skip_region_validation      = true
@@ -19,7 +19,6 @@ terraform {
 }
 
 provider "scaleway" {
-    project_id = var.project_id
   zone   = "fr-par-1"
   region = "fr-par"
 }
