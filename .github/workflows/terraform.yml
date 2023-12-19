@@ -49,7 +49,6 @@ jobs:
       if: github.event_name == 'push'
       working-directory: terraform/
       run: terraform plan -input=false -var-file="envs/${{ steps.set_workspace.outputs.environment }}.tfvars"
-      continue-on-error: true
       env:
           SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
