@@ -48,7 +48,7 @@ jobs:
     - name: Terraform Plan
       if: github.event_name == 'push'
       working-directory: terraform/
-      run: terraform plan -input=false -var-file="terraform/envs/${{ steps.set_workspace.outputs.environment }}.tfvars"
+      run: terraform plan -input=false -var-file="envs/${{ steps.set_workspace.outputs.environment }}.tfvars"
       env:
           SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
@@ -62,7 +62,7 @@ jobs:
     - name: Terraform Apply
       if: github.event_name == 'push'
       working-directory: terraform/
-      run: terraform apply -auto-approve -input=false -var-file="terraform/envs/${{ steps.set_workspace.outputs.environment }}.tfvars"
+      run: terraform apply -auto-approve -input=false -var-file="envs/${{ steps.set_workspace.outputs.environment }}.tfvars"
       env:
           SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
