@@ -40,9 +40,23 @@ jobs:
       working-directory: terraform/
       run: terraform fmt -check
 
-    - name: Terraform Plan
+    - name: Terraform Plan dev
+      if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
       working-directory: terraform/
-      run: terraform plan -input=false
+      run: terraform plan -input=false -var-file="envs/dev.tfvars"
+      env:
+          SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
+          SCW_SECRET_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SCW_SECRET_KEY }}
+          SCW_DEFAULT_ORGANIZATION_ID: ${{ secrets.SCW_DEFAULT_ORGANIZATION_ID }}
+          SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
+          AWS_DEFAULT_REGION: "fr-par-1"
+
+    - name: Terraform Plan prd
+      if: github.ref == 'refs/heads/prd' && github.event_name == 'push'
+      working-directory: terraform/
+      run: terraform plan -input=false -var-file="envs/prd.tfvars"
       env:
           SCW_ACCESS_KEY: ${{ secrets.SCW_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.SCW_ACCESS_KEY }}
@@ -65,7 +79,7 @@ jobs:
           SCW_DEFAULT_PROJECT_ID: ${{ secrets.SCW_DEFAULT_PROJECT_ID }}
           AWS_DEFAULT_REGION: "fr-par-1"
 
-    - name: Terraform Apply Production
+    - name: Terraform Apply dev
       if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
       working-directory: terraform/
       run: terraform apply -auto-approve -input=false -var-file="envs/dev.tfvars"
