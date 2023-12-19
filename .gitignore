@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=terraform,symfony,ansible
 
 ### SSH ###
-terraform/.ssh/*
+terraform/.ssh/id_ed25519
 
 ### Ansible ###
 *.retry
